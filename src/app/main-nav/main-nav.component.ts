@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from '../toast/toast.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private toastService: ToastService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  showAbout() {
+    this.toastService.showToast('success', 5000, 'This application was created by Natalia Flores (c).');
+  }
+
+  logout() {
+    localStorage.setItem('user', JSON.stringify({}));
+    this.router.navigate(['login']);
   }
 
 }
